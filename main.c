@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
+#include <winscard.h>
 
 int main() {
 
@@ -66,7 +67,32 @@ int main() {
         }
         printf("Short break over. Start working!");
         Beep(750, 300);
+
     }
 
+    printf("\nDo you want a long break? (y/n): ");
+    char lo_br;
+    scanf(" %c", &lo_br);
+
+    if (lo_br == 'y') {
+        int total_long_break = long_break * 60;
+
+        printf("Start long break...\n");
+        while (total_long_break >= 0){
+        int m = total_long_break / 60;
+        int s = total_long_break % 60;
+        printf("\rTime left: %02d:%02d          ", m, s);
+        fflush(stdout);
+        if(total_long_break == 0) break;
+        Sleep(1000);
+        total_long_break--;
+    }
+        printf("\nLong break is over!");
+        Beep(750,300);
+    }
+    else {
+        printf("Over program...\n");
+    }
+    
     return 0;
 }
